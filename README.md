@@ -26,7 +26,7 @@ Getting Started
 # Clone the repository
 git clone git@github.com:bluefocus/twitter-clone.git
 
-cd twitter-clone
+cd ./twitter-clone
 
 # Install the required gems
 bundle install
