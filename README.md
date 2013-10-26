@@ -33,5 +33,11 @@ bundle install
 
 # Set up the database
 bundle exec rake db:create db:migrate db:test:prepare
+```
 
+Run the Tests
+-------------
+
+```sh
+bundle exec rspec
 ```
