@@ -36,6 +36,11 @@ nav {
   padding: 10px 14px 18px;
 }
 
+.nav-sign-out {
+  float: right;
+  margin-top: -10px;
+}
+
 .bird-topbar-blue {
   background-image: url(/assets/twitter_web_sprite_icons.png);
   background-position: -80px 0;
@@ -76,6 +81,11 @@ nav {
   font-size: 12px;
 }
 
+.panel form .form-group.or-links {
+  margin-top: 8px !important;
+  margin-bottom: 20px !important;
+}
+
 .panel form .form-group label {
   font-weight: normal;
 }
@@ -97,14 +107,14 @@ nav {
   float: left;
 }
 
-.panel form .form-group .btn {
-  float: right;
-}
-
 .panel form .form-group .btn.btn-warning {
   color: black;
 }
 
 .panel form .clearfix {
   padding: 1px;
+}
+
+.clearfix.top-space {
+  margin: 120px 0 0 0;
 }
