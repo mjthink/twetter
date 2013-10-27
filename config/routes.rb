@@ -5,7 +5,7 @@ TwitterClone::Application.routes.draw do
 
   authenticated :user do
     resources :follows
-    root :to => 'discover#index', :as => :user_root
+    root :to => 'follows#index', :as => :user_root
   end
 
   # You can have the root of your site routed with "root"

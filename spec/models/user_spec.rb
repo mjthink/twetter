@@ -22,4 +22,18 @@ describe User do
     it { should validate_presence_of :username }
     it { should validate_uniqueness_of :username }
   end
+
+  describe ".all_except" do
+    let!(:user) { FactoryGirl.create(:user) }
+
+    before do
+      users = 10.times.map { FactoryGirl.create(:user) }
+      users.sort_by!{|x| x.name}
+      @ids = users.map(&:id)
+    end
+
+    it "should contain all users except the on passed, ordered by name" do
+      User.all_except(user).load.map(&:id).should == @ids
+    end
+  end
 end
