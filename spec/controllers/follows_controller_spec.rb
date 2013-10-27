@@ -8,17 +8,25 @@ describe FollowsController do
 
       it { should_not be_successful }
     end
+
+    describe "POST create" do
+      subject { response }
+      before { post :create, :follow => { :following_id => 1 } }
+
+      it { should_not be_successful }
+    end
   end
 
   context "when a user is logged in" do
-    describe "GET index" do
-      let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
 
+    before { sign_in user }
+
+    describe "GET index" do
       subject { response }
 
       before do
         10.times { FactoryGirl.create(:user) }
-        sign_in user
         get :index
       end
 
@@ -26,6 +34,34 @@ describe FollowsController do
 
       it "should assign @users to all Users but the logged in one" do
         assigns(:users).map(&:id).should == User.all_except(user).load.map(&:id)
+      end
+    end
+
+    describe "POST create" do
+      context "with a valid user id to follow" do
+        let(:following) { FactoryGirl.create(:user) }
+
+        before { post :create, :follow => { :following_id => following.id } }
+
+        it "should redirect to GET index" do
+          response.should redirect_to follows_path
+        end
+
+        it "should display a success message" do
+          flash[:success].should == "You are following @#{following.username}"
+        end
+      end
+
+      context "with an invalid user id to follow" do
+        before { post :create, :follow => { :following_id => -1 } }
+
+        it "should redirect to GET index" do
+          response.should redirect_to follows_path
+        end
+
+        it "should display an error message" do
+          flash[:error].should == "Your attempt to follow was unsuccessful"
+        end
       end
     end
   end

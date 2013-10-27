@@ -136,3 +136,17 @@ nav {
   vertical-align: middle;
   line-height: 40px;
 }
+
+.alert-float {
+  position: fixed;
+  top: 0;
+  z-index: 1050;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.alert-float .alert {
+  z-index: 1050;
+  padding: 10px;
+}
