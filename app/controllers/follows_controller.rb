@@ -16,9 +16,22 @@ class FollowsController < ApplicationController
     redirect_to :action => :index
   end
 
+  def destroy
+    if resource and resource.destroy
+      flash[:success] = "You are no longer following @#{resource.following.username}"
+    else
+      flash[:error] = "Your attempt to unfollow was not successful"
+    end
+    redirect_to :action => :index
+  end
+
   private
 
   def follow_params
     params.require(:follow).permit(:following_id)
+  end
+
+  def resource
+    @resource ||= current_user.follows.where(:id => params[:id]).first
   end
 end

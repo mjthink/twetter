@@ -15,6 +15,15 @@ describe FollowsController do
 
       it { should_not be_successful }
     end
+
+    describe "DELETE destroy" do
+      let(:follow) { FactoryGirl.create(:follow) }
+      subject { response }
+
+      before { delete :destroy, :id => follow.id }
+
+      it{ should_not be_successful }
+    end
   end
 
   context "when a user is logged in" do
@@ -50,6 +59,12 @@ describe FollowsController do
         it "should display a success message" do
           flash[:success].should == "You are following @#{following.username}"
         end
+
+        it "should create a new record" do
+          expect {
+            post :create, :follow => { :following_id => FactoryGirl.create(:user).id }
+          }.to change { Follow.count }.by(1)
+        end
       end
 
       context "with an invalid user id to follow" do
@@ -61,6 +76,50 @@ describe FollowsController do
 
         it "should display an error message" do
           flash[:error].should == "Your attempt to follow was unsuccessful"
+        end
+
+        it "should not create a new record" do
+          expect {
+            post :create, :follow => { :following_id => -1 }
+          }.to_not change { Follow.count }
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      context "when the Follow is a valid instance" do
+        let(:follow) { FactoryGirl.create(:follow) }
+
+        before { delete :destroy, :id => follow.id }
+
+        context "that belongs to the current_user" do
+          let(:follow) { FactoryGirl.create(:follow, :user => user) }
+
+          it "should redirect to GET index" do
+            response.should redirect_to follows_path
+          end
+
+          it "should display a success message" do
+            flash[:success].should == "You are no longer following @#{follow.following.username}"
+          end
+
+          it "should delete the record" do
+            Follow.where(:id => follow.id).should_not exist
+          end
+        end
+
+        context "that does not belong to the current_user" do
+          it "should redirect to GET index" do
+            response.should redirect_to follows_path
+          end
+
+          it "should display and error message" do
+            flash[:error].should == "Your attempt to unfollow was not successful"
+          end
+
+          it "should not delete the record" do
+            Follow.where(:id => follow.id).should exist
+          end
         end
       end
     end

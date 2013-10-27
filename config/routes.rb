@@ -4,7 +4,7 @@ TwitterClone::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   authenticated :user do
-    resources :follows
+    resources :follows, :except => [:new, :edit, :show, :update]
     root :to => 'follows#index', :as => :user_root
   end
 
