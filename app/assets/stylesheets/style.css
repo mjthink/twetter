@@ -26,7 +26,7 @@ body {
 }
 
 nav {
-  background-image: url(/assets/twitter_web_sprite_bgs.png);
+  background-image: url(../assets/twitter_web_sprite_bgs.png);
   background-repeat: repeat-x;
   min-height: 40px !important;
 }
@@ -42,7 +42,7 @@ nav {
 }
 
 .bird-topbar-blue {
-  background-image: url(/assets/twitter_web_sprite_icons.png);
+  background-image: url(../assets/twitter_web_sprite_icons.png);
   background-position: -80px 0;
   width: 24px;
   height: 21px;
