@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe User do
+  context "associations" do
+    it { should have_many :follows }
+  end
+
   context "factories" do
     describe "#user" do
       subject { FactoryGirl.build(:user) }

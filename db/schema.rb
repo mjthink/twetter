@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131026231121) do
+ActiveRecord::Schema.define(version: 20131027165351) do
+
+  create_table "follows", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "following_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
