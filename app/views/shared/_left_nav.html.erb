@@ -1,4 +1,46 @@
 <div class="col-md-4">
+  <ul class="nav nav-pills nav-stacked well text-left">
+    <li>
+      <%= content_tag :strong, current_user.name %>
+    </li>
+    <li>
+      <%= content_tag :small, '@'+current_user.username %>
+    </li>
+    <li>
+      <table class="table table-bordered stats">
+        <tbody>
+          <tr>
+            <td>
+              <%= content_tag :h4, current_user.tweets.count %>
+              <%= content_tag :small, 'Tweets', :class => "uppercase lighter" %>
+            </td>
+            <td>
+              <%= content_tag :h4, current_user.follows.count %>
+              <%= content_tag :small, 'Following', :class => "uppercase lighter" %>
+            </td>
+            <td>
+              <%= content_tag :h4, Follow.where(:following_id => current_user.id).count %>
+              <%= content_tag :small, 'Followers', :class => "uppercase lighter" %>
+            </td>
+        </tbody>
+      </table>
+    </li>
+    <li>
+    <%= form_for (@tweet || :tweet), :url => tweets_path,
+                         :builder => InlineErrorsBuilder,
+                         :method => :POST,
+                         :role => :form do |f| %>
+      <div class="mar-top-15">
+        <%= content_tag :div, :class => f.validation_class(:content, "form-group") do %>
+          <%= f.text_area :content, :placeholder => "Compose new Tweet...", :class => 'form-control' %>
+          <%= f.errors_for :content %>
+        <% end %>
+
+        <%= f.submit "Tweet", :class => "btn btn-primary pull-right" %>
+      </div>
+    <% end %>
+  </ul>
+
   <ul class="nav nav-pills nav-stacked well">
     <%= nav_item("Follow", follows_path) %>
     <%= nav_item("Tweet", tweets_path) %>
