@@ -3,6 +3,7 @@ require 'spec_helper'
 describe User do
   context "associations" do
     it { should have_many :follows }
+    it { should have_many :tweets }
   end
 
   context "factories" do
@@ -34,6 +35,23 @@ describe User do
 
     it "should contain all users except the on passed, ordered by name" do
       User.all_except(user).load.map(&:id).should == @ids
+    end
+  end
+
+  describe "#all_tweets" do
+    let!(:user) { FactoryGirl.create(:user) }
+    let(:t1) { FactoryGirl.create(:tweet, :user => user)}
+    let(:t2) { FactoryGirl.create(:tweet) }
+    let(:t3) { FactoryGirl.create(:tweet) }
+
+    before do
+      t1
+      user.follows.create(:following => t2.user)
+      t3
+    end
+
+    it "should return all my tweets and followed tweets, ordered by creation time" do
+      user.all_tweets.load.map(&:id).should == [t2.id, t1.id]
     end
   end
 end

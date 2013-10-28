@@ -35,6 +35,14 @@ bundle install
 bundle exec rake db:create db:migrate db:test:prepare
 ```
 
+Seeds
+-------------
+
+```sh
+rake seed:tweets            # Create 5 tweets for each user
+rake seed:users             # Create 20 users
+```
+
 Run the Tests
 -------------
 
