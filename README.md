@@ -24,7 +24,7 @@ Getting Started
 
 ```sh
 # Clone the repository
-git clone git@github.com:bluefocus/twitter-clone.git
+git clone git@github.com:Thinkful/twitter-clone.git
 
 cd ./twitter-clone
 
