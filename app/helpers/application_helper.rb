@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def nav_item(name, path)
-    content_tag(:li, link_to(name, path), :class => is_active?(name))
+    content_tag(:li, link_to(name, path), :class => active_class(name))
   end
 
   def notices
@@ -27,7 +27,7 @@ module ApplicationHelper
 
   private
 
-  def is_active?(name)
+  def active_class(name)
     case name
     when "Follow" then
       controller_name == 'follows' ? 'active' : ''
