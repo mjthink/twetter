@@ -77,3 +77,12 @@ Run the Tests
 ```sh
 bundle exec rspec
 ```
+
+Authors
+-------
+
+**Dan Matthews**
+
+- http://github.com/bluefocus
+- http://bluefoc.us
+- http://danmatthe.ws
