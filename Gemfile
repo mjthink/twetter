@@ -42,6 +42,8 @@ end
 # Use Devise for authentication: https://github.com/plataformatec/devise#getting-started
 gem 'devise'
 
+gem 'wirble', :group => :development
+
 group :development, :test do
   # Use RSpec for testing: https://github.com/rspec/rspec-rails
   gem 'rspec-rails', '~> 2.0'

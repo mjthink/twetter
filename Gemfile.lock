@@ -140,6 +140,10 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+<<<<<<< HEAD
+=======
+    wirble (0.1.3)
+>>>>>>> myProfileBranch
 
 PLATFORMS
   ruby
@@ -161,3 +165,7 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
+<<<<<<< HEAD
+=======
+  wirble
+>>>>>>> myProfileBranch
